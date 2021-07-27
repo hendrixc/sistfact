@@ -24,7 +24,7 @@ import java.util.List;
  * @author Hendrix
  */
 public class FacturaRSTransform {
-    
+
     public static FacturaRS buildFacturaRSComplete(Factura factura) {
         FacturaRS facturaRS = FacturaRSTransform.buildFacturaRS(factura);
         List<FacturaDetalleRS> detalles = new ArrayList<>();
@@ -39,7 +39,7 @@ public class FacturaRSTransform {
         facturaRS.setImpuestos(impuestos);
         return facturaRS;
     }
-    
+
     public static FacturaRS buildFacturaRS(Factura factura) {
         return FacturaRS.builder()
                 .fecha(factura.getFecha())
@@ -51,12 +51,12 @@ public class FacturaRSTransform {
                 .total(factura.getTotal())
                 .tipoIdentificacion(factura.getCliente().getTipoIdentificacion())
                 .identificacion(factura.getCliente().getIdentificacion())
-                .nombre(("RUC".equals(factura.getCliente().getTipoIdentificacion()) ? 
-                        factura.getCliente().getRazonSocial() : 
-                        factura.getCliente().getApellido()+ " " + factura.getCliente().getNombre()))
+                .nombre(("RUC".equals(factura.getCliente().getTipoIdentificacion())
+                        ? factura.getCliente().getRazonSocial()
+                        : factura.getCliente().getApellido() + " " + factura.getCliente().getNombre()))
                 .build();
     }
-    
+
     private static FacturaDetalleRS buildDetalleFactura(FacturaDetalle detalle) {
         return FacturaDetalleRS.builder()
                 .cantidad(detalle.getCantidad())
@@ -65,7 +65,7 @@ public class FacturaRSTransform {
                 .subtotal(detalle.getSubtotal())
                 .build();
     }
-    
+
     private static FacturaImpuestoRS buildFacturaImpuesto(FacturaImpuesto impuesto) {
         return FacturaImpuestoRS.builder()
                 .porcentaje(impuesto.getPk().getPorcentaje())
@@ -73,5 +73,5 @@ public class FacturaRSTransform {
                 .siglas(impuesto.getImpuestoPorcentaje().getImpuesto().getSiglas())
                 .build();
     }
-    
+
 }

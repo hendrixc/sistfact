@@ -14,12 +14,10 @@ package ec.edu.espe.distribuidas.sistfact.exception;
  *
  * @author Hendrix
  */
-public class CreateException  extends RuntimeException{
+public class CreateException extends RuntimeException {
 
     public CreateException(String message) {
         super(message);
     }
-    
-    
-    
+
 }

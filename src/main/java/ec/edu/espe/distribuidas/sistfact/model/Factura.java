@@ -31,6 +31,7 @@ import lombok.Data;
 
 /**
  * Representa a la tabla FACTURA.
+ *
  * @author Hendrix
  */
 @Data
@@ -42,42 +43,42 @@ public class Factura implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "COD_FACTURA", nullable = false)
     private Integer codigo;
-    
+
     @Column(name = "COD_CLIENTE", nullable = false)
     private Integer codigoCliente;
-    
+
     @Column(name = "COD_ESTABLECIMIENTO", nullable = false, length = 3)
     private String codigoEstablecimiento;
-    
+
     @Column(name = "PUNTO_EMISION", nullable = false, length = 3)
     private String puntoEmision;
-    
+
     @Column(name = "SECUENCIAL", nullable = false)
     private Integer secuencial;
-    
+
     @Column(name = "NUMERO_AUTORIZACION", length = 40)
     private String numeroAutorizacion;
-    
+
     @Column(name = "FECHA", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    
+
     @Column(name = "SUBTOTAL", nullable = false, precision = 10, scale = 2)
     private BigDecimal subtotal;
-    
+
     @Basic(optional = false)
     @Column(name = "TOTAL", nullable = false, precision = 10, scale = 2)
     private BigDecimal total;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "factura")
-    private List<FacturaDetalle> detalles; 
-    
+    private List<FacturaDetalle> detalles;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "factura")
     private List<FacturaImpuesto> impuestos;
-    
-    @JoinColumn(name = "COD_CLIENTE", referencedColumnName = "COD_CLIENTE", nullable = false, insertable = false, updatable = false)
+
+    @JoinColumn(name = "COD_CLIENTE", referencedColumnName = "COD_CLIENTE", nullable = false, insertable = false, 
+            updatable = false)
     @ManyToOne(optional = false)
     private Cliente cliente;
 
-    
 }

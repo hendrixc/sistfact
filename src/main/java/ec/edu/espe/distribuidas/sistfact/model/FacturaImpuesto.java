@@ -38,13 +38,16 @@ public class FacturaImpuesto implements Serializable {
     private BigDecimal valor;
 
     @MapsId("codigoFactura")
-    @JoinColumn(name = "COD_FACTURA", referencedColumnName = "COD_FACTURA", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "COD_FACTURA", referencedColumnName = "COD_FACTURA", nullable = false, insertable = false, 
+            updatable = false)
     @ManyToOne(optional = false)
     private Factura factura;
 
     @JoinColumns({
-        @JoinColumn(name = "COD_IMPUESTO", referencedColumnName = "COD_IMPUESTO", nullable = false, insertable = false, updatable = false),
-        @JoinColumn(name = "PORCENTAJE", referencedColumnName = "PORCENTAJE", nullable = false, insertable = false, updatable = false)})
+        @JoinColumn(name = "COD_IMPUESTO", referencedColumnName = "COD_IMPUESTO", nullable = false, insertable = false,
+                updatable = false),
+        @JoinColumn(name = "PORCENTAJE", referencedColumnName = "PORCENTAJE", nullable = false, insertable = false, 
+                updatable = false)})
     @ManyToOne(optional = false)
     private ImpuestoPorcentaje impuestoPorcentaje;
 

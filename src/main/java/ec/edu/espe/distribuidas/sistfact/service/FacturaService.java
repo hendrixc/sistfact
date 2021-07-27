@@ -21,6 +21,7 @@ import ec.edu.espe.distribuidas.sistfact.model.ImpuestoPorcentaje;
 import ec.edu.espe.distribuidas.sistfact.model.Producto;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -38,35 +39,35 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Slf4j
 public class FacturaService {
-    
+
     private final FacturaRepository facturaRepository;
     private final ProductoRepository productoRepository;
     private final ImpuestoPorcentajeRepository impuestoPorcentajeRepository;
 
-    public FacturaService(FacturaRepository facturaRepository, ProductoRepository productoRepository, 
+    public FacturaService(FacturaRepository facturaRepository, ProductoRepository productoRepository,
             ImpuestoPorcentajeRepository impuestoPorcentajeRepository) {
         this.facturaRepository = facturaRepository;
         this.productoRepository = productoRepository;
         this.impuestoPorcentajeRepository = impuestoPorcentajeRepository;
     }
-    
+
     public Factura obtenerPorNumeroAutorizacion(String numeroAutorizacion) {
         Factura facturaOpt = this.facturaRepository.findByNumeroAutorizacion(numeroAutorizacion);
         return facturaOpt;
     }
-    
+
     public List<Factura> obtenerPorFechas(Date fechaInicio, Date fechaFin) {
         LocalDateTime ldInicio = fechaInicio.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().atStartOfDay();
         LocalDateTime ldFin = fechaFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().atTime(23, 59, 59);
         log.info("Va a buscar facturas desde: {} hasta: {}", ldInicio, ldFin);
         if (ldInicio.isBefore(ldFin)) {
-            return this.facturaRepository.findByFechaBetween(java.sql.Timestamp.valueOf(ldInicio), java.sql.Timestamp.valueOf(ldFin));
+            return this.facturaRepository.findByFechaBetween(Timestamp.valueOf(ldInicio), Timestamp.valueOf(ldFin));
         } else {
             log.error("Error en las fechas recibidas: fechaInicio: {}, fechaFin: {}", fechaInicio, fechaFin);
             throw new RuntimeException("Fechas invalidas");
         }
     }
-    
+
     @Transactional
     public Factura crearFactura(Factura factura) {
         BigDecimal subtotal = new BigDecimal("0.00");
@@ -79,15 +80,15 @@ public class FacturaService {
             detalle.setSubtotal(detalle.getCantidad().multiply(detalle.getPrecioUnitario()));
             producto.setExistencia(producto.getExistencia().subtract(detalle.getCantidad()));
             if ("S".equals(producto.getIva())) {
-                List<ImpuestoPorcentaje> impuestosPorcentaje = 
-                        this.impuestoPorcentajeRepository.findByPkCodigoImpuestoAndEstadoOrderByPkPorcentaje("IVA", "ACT");
+                List<ImpuestoPorcentaje> impuestosPorcentaje = this.impuestoPorcentajeRepository
+                        .findByPkCodigoImpuestoAndEstadoOrderByPkPorcentaje("IVA", "ACT");
                 ImpuestoPorcentaje ipTemp = null;
                 for (ImpuestoPorcentaje ip : impuestosPorcentaje) {
                     if (ip.getPk().getPorcentaje().floatValue() >= 0.1) {
                         ipTemp = ip;
                     }
                 }
-                FacturaDetalleImpuesto fdi = new FacturaDetalleImpuesto(ipTemp.getPk().getCodigoImpuesto(), 
+                FacturaDetalleImpuesto fdi = new FacturaDetalleImpuesto(ipTemp.getPk().getCodigoImpuesto(),
                         ipTemp.getPk().getPorcentaje(), null, producto.getCodigo());
                 fdi.setValor(detalle.getSubtotal().multiply(fdi.getPk().getPorcentaje()));
                 fdi.setValor(fdi.getValor().divide(new BigDecimal("100.00"), 2, RoundingMode.HALF_UP));
@@ -105,13 +106,12 @@ public class FacturaService {
         List<FacturaImpuesto> imps = new ArrayList<>();
         imps.add(facturaImpuesto);
         factura.setImpuestos(imps);
-        log.info("Va a registrar la factrura: {}",factura);
+        log.info("Va a registrar la factrura: {}", factura);
         this.facturaRepository.save(factura);
         return factura;
     }
-    
-    
-    public String numeroAutorizacion(Factura factura ) {
+
+    public String numeroAutorizacion(Factura factura) {
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmm");
         StringBuilder sb = new StringBuilder(sdf.format(factura.getFecha()));
         sb.append(factura.getCodigoEstablecimiento());

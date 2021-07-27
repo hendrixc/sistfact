@@ -21,9 +21,9 @@ import lombok.Data;
 @Data
 @Builder
 public class FacturaImpuestoRS {
-    
+
     private String siglas;
     private BigDecimal porcentaje;
     private BigDecimal valor;
-    
+
 }

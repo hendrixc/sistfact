@@ -18,7 +18,7 @@ import javax.persistence.Embeddable;
 
 /**
  * Representa a la clave primaria de la tabla: FACTURA_IMPUESTO.
- * 
+ *
  * @author Hendrix
  */
 @Embeddable
@@ -26,10 +26,10 @@ public class FacturaImpuestoPK implements Serializable {
 
     @Column(name = "COD_FACTURA", nullable = false)
     private Integer codigoFactura;
-    
+
     @Column(name = "COD_IMPUESTO", nullable = false, length = 3)
     private String codigoImpuesto;
-    
+
     @Column(name = "PORCENTAJE", nullable = false, precision = 4, scale = 1)
     private BigDecimal porcentaje;
 
@@ -99,12 +99,10 @@ public class FacturaImpuestoPK implements Serializable {
         return true;
     }
 
-    
-
     @Override
     public String toString() {
-        return ".FacturaImpuestoPK[ codigoFactura=" + codigoFactura + ", codigoImpuesto=" + codigoImpuesto + 
-                ", porcentaje=" + porcentaje + " ]";
+        return ".FacturaImpuestoPK[ codigoFactura=" + codigoFactura + ", codigoImpuesto=" + codigoImpuesto
+                + ", porcentaje=" + porcentaje + " ]";
     }
-    
+
 }

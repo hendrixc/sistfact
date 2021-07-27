@@ -24,6 +24,7 @@ import lombok.Data;
 
 /**
  * Representa a la tabla IMPUESTO.
+ *
  * @author Hendrix
  */
 @Data
@@ -32,20 +33,19 @@ import lombok.Data;
 public class Impuesto implements Serializable {
 
     private static final long serialVersionUID = 1234567L;
-    
+
     @Id
     @Column(name = "COD_IMPUESTO", nullable = false, length = 3)
     private String codigo;
-    
+
     @Column(name = "NOMBRE", nullable = false, length = 100)
     private String nombre;
-    
+
     @Column(name = "SIGLAS", nullable = false, length = 10)
     private String siglas;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "impuesto", fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<ImpuestoPorcentaje> impuestoPorcentajes;
 
-    
 }

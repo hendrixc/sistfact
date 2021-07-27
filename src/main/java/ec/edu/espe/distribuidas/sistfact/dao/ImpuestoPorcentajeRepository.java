@@ -19,7 +19,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Hendrix
  */
-public interface ImpuestoPorcentajeRepository extends JpaRepository<ImpuestoPorcentaje, ImpuestoPorcentajePK>{
-    
+public interface ImpuestoPorcentajeRepository extends JpaRepository<ImpuestoPorcentaje, ImpuestoPorcentajePK> {
+
     List<ImpuestoPorcentaje> findByPkCodigoImpuestoAndEstadoOrderByPkPorcentaje(String codigoImpuesto, String estado);
 }

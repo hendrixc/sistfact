@@ -19,14 +19,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Hendrix
  */
-public interface FacturaRepository extends JpaRepository<Factura, Integer>{
-    
+public interface FacturaRepository extends JpaRepository<Factura, Integer> {
+
     List<Factura> findByClienteOrderByFechaDesc(Integer codigo);
-    
+
     Factura findByNumeroAutorizacion(String numeroAutorizacion);
-    
+
     List<Factura> findByFechaBetween(Date inicio, Date fin);
-    
-    Factura findByCodigoEstablecimientoAndPuntoEmisionAndSecuencial(String codigoEstablecimiento, String puntoEmision, Long secuencial);
-    
+
+    Factura findByCodigoEstablecimientoAndPuntoEmisionAndSecuencial(String codigoEstablecimiento, String puntoEmision, 
+            Long secuencial);
+
 }

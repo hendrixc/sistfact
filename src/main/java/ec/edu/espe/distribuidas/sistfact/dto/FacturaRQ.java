@@ -19,12 +19,12 @@ import lombok.Data;
  */
 @Data
 public class FacturaRQ {
-    
+
     private Integer codigoCliente;
     private String establecimiento;
     private String puntoEmision;
     private Integer secuencial;
-    
+
     private List<FacturaDetalleRQ> detalles;
 
 }

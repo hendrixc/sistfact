@@ -19,10 +19,8 @@ import lombok.Data;
  */
 @Data
 public class ImpuestoPorcentajeRQ {
-    
+
     private String codigoImpuesto;
     private BigDecimal porcentaje;
-    
-    
-    
+
 }

@@ -17,7 +17,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Hendrix
  */
-public interface ImpuestoRepository extends JpaRepository<Impuesto, String>{
-    
-    
+public interface ImpuestoRepository extends JpaRepository<Impuesto, String> {
+
 }

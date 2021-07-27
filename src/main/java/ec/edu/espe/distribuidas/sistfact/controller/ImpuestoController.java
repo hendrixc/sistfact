@@ -31,25 +31,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/impuesto")
 @Slf4j
 public class ImpuestoController {
-    
+
     private final ImpuestoService service;
 
     public ImpuestoController(ImpuestoService impuestoService) {
         this.service = impuestoService;
     }
-    
+
     @GetMapping
     public ResponseEntity listarTodos() {
         List<Impuesto> impuestos = this.service.listAll();
         return ResponseEntity.ok(impuestos);
     }
-    
+
     @GetMapping(value = "{codigo}")
     public ResponseEntity obtenerPorCodigo(@PathVariable("codigo") String codigo) {
         log.info("Obteniendo Impuesto por codigo: {} esperando por resultado", codigo);
         return ResponseEntity.of(this.service.obtenerPorCodigo(codigo));
     }
-    
+
     @PostMapping
     public ResponseEntity crearImpuesto(@RequestBody Impuesto impuesto) {
         try {
@@ -61,7 +61,7 @@ public class ImpuestoController {
             return ResponseEntity.badRequest().build();
         }
     }
-    
+
     @PutMapping
     public ResponseEntity modificarImpuesto(@RequestBody Impuesto impuesto) {
         try {
@@ -71,6 +71,5 @@ public class ImpuestoController {
             return ResponseEntity.badRequest().build();
         }
     }
-    
-    
+
 }

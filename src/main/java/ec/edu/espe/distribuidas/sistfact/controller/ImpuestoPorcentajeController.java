@@ -32,13 +32,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/impuesto/porcentaje")
 public class ImpuestoPorcentajeController {
-    
+
     private final ImpuestoService service;
 
     public ImpuestoPorcentajeController(ImpuestoService service) {
         this.service = service;
     }
-    
+
     @GetMapping(value = "{codigo}")
     public ResponseEntity obtenerPorcentajesImpuesto(@PathVariable("codigo") String codigo) {
         try {
@@ -51,14 +51,14 @@ public class ImpuestoPorcentajeController {
                         .estado(ip.getEstado())
                         .fechaInicio(ip.getFechaInicio())
                         .fechaFin(ip.getFechaFin()).build());
-                
+
             }
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }
-    
+
     @PostMapping
     public ResponseEntity crear(@RequestBody ImpuestoPorcentajeRQ request) {
         ImpuestoPorcentaje ip = new ImpuestoPorcentaje(request.getCodigoImpuesto(), request.getPorcentaje());

@@ -27,6 +27,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * Representa a la tabla IMPUESTO_PORCENTAJE.
+ *
  * @author Hendrix
  */
 @Data
@@ -37,20 +38,20 @@ public class ImpuestoPorcentaje implements Serializable {
 
     @EmbeddedId
     private ImpuestoPorcentajePK pk;
-    
+
     @Column(name = "ESTADO", nullable = false, length = 3)
     private String estado;
-    
+
     @Column(name = "FECHA_INICIO", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
-    
+
     @Column(name = "FECHA_FIN")
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
-    
-    
-    @JoinColumn(name = "COD_IMPUESTO", referencedColumnName = "COD_IMPUESTO", nullable = false, insertable = false, updatable = false)
+
+    @JoinColumn(name = "COD_IMPUESTO", referencedColumnName = "COD_IMPUESTO", nullable = false, insertable = false, 
+            updatable = false)
     @ManyToOne(optional = false)
     @JsonBackReference
     private Impuesto impuesto;
@@ -62,6 +63,4 @@ public class ImpuestoPorcentaje implements Serializable {
         this.pk = pkT;
     }
 
-    
-    
 }

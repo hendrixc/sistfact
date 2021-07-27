@@ -19,8 +19,8 @@ import lombok.Data;
  */
 @Data
 public class FacturaDetalleRQ {
-    
+
     private String codigoProducto;
     private BigDecimal cantidad;
-    
+
 }

@@ -42,7 +42,7 @@ public class ProductoController {
             return ResponseEntity.notFound().build();
         }
     }
-    
+
     @GetMapping
     public ResponseEntity obtenerActivos() {
         List<Producto> productos = this.service.listByEstado("ACT");

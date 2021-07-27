@@ -36,13 +36,14 @@ public class FacturaDetalleImpuesto implements Serializable {
     @Column(name = "VALOR", nullable = false, precision = 10, scale = 2)
     private BigDecimal valor;
 
-    
     @JoinColumns({
-        @JoinColumn(name = "COD_FACTURA", referencedColumnName = "COD_FACTURA", nullable = false, insertable = false, updatable = false),
-        @JoinColumn(name = "COD_PRODUCTO", referencedColumnName = "COD_PRODUCTO", nullable = false, insertable = false, updatable = false)})
+        @JoinColumn(name = "COD_FACTURA", referencedColumnName = "COD_FACTURA", nullable = false, insertable = false, 
+                updatable = false),
+        @JoinColumn(name = "COD_PRODUCTO", referencedColumnName = "COD_PRODUCTO", nullable = false, insertable = false, 
+                updatable = false)})
     @ManyToOne(optional = false)
     private FacturaDetalle facturaDetalle;
-    
+
     public FacturaDetalleImpuesto() {
     }
 

@@ -22,13 +22,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProductoService {
-    
+
     private final ProductoRepository productoRepo;
-    
+
     public ProductoService(ProductoRepository productoRepo) {
         this.productoRepo = productoRepo;
     }
-    
+
     public Producto obtainByCodigo(String codigo) {
         Optional<Producto> productoOpt = this.productoRepo.findById(codigo);
         if (productoOpt.isPresent()) {
@@ -37,9 +37,9 @@ public class ProductoService {
             throw new RuntimeException("Not found");
         }
     }
-    
+
     public List<Producto> listByEstado(String estado) {
         return this.productoRepo.findByEstadoOrderByNombre(estado);
     }
-    
+
 }

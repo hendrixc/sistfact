@@ -19,11 +19,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Hendrix
  */
-public interface ProductoRepository extends JpaRepository<Producto, String>{
-    
+public interface ProductoRepository extends JpaRepository<Producto, String> {
+
     List<Producto> findByEstadoOrderByNombre(String estado);
-    
+
     List<Producto> findByNombreLikeOrderByNombre(String nombre);
-    
+
     List<Producto> findByNombreLikeAndExistenciaGreaterThanOrderByNombre(String nombre, BigDecimal valor);
 }

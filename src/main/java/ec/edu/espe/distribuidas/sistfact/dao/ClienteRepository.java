@@ -18,14 +18,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Hendrix
  */
-public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
-    
+public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
+
     Cliente findByTipoIdentificacionAndIdentificacion(String tipoIdentificacion, String identificacion);
-    
+
     List<Cliente> findByApellidoStartingWithOrderByApellido(String apellido);
-    
+
     List<Cliente> findByRazonSocialStartingWithOrderByRazonSocial(String razonSocial);
-    
+
     List<Cliente> findByTelefonoOrderByApellidoAscNombreAscRazonSocialAsc(String telefono);
-    
+
 }

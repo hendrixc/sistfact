@@ -18,7 +18,7 @@ import lombok.Data;
 
 /**
  * Representa las columnas que conforman la clave primaria de la tabla IMPUESTO_PORCENTAJE.
- * 
+ *
  * @author Hendrix
  */
 @Data
@@ -27,10 +27,8 @@ public class ImpuestoPorcentajePK implements Serializable {
 
     @Column(name = "COD_IMPUESTO", nullable = false, length = 3)
     private String codigoImpuesto;
-    
+
     @Column(name = "PORCENTAJE", nullable = false, precision = 4, scale = 1)
     private BigDecimal porcentaje;
 
-
-    
 }

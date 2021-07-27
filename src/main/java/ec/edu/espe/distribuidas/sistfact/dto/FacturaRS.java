@@ -23,7 +23,7 @@ import lombok.Data;
 @Data
 @Builder
 public class FacturaRS {
-    
+
     private String numeroAutorizacion;
     private String establecimiento;
     private String puntoEmision;
@@ -34,7 +34,7 @@ public class FacturaRS {
     private String tipoIdentificacion;
     private String identificacion;
     private String nombre;
-    
+
     private List<FacturaDetalleRS> detalles;
     private List<FacturaImpuestoRS> impuestos;
 }

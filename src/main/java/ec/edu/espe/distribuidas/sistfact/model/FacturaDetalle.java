@@ -26,6 +26,7 @@ import javax.persistence.Table;
 
 /**
  * Representa a la tabla FACTURA_DETALLE.
+ *
  * @author Hendrix
  */
 @Entity
@@ -46,16 +47,18 @@ public class FacturaDetalle implements Serializable {
 
     @Column(name = "SUBTOTAL", nullable = false, precision = 10, scale = 2)
     private BigDecimal subtotal;
-   
+
     @MapsId("codigoFactura")
-    @JoinColumn(name = "COD_FACTURA", referencedColumnName = "COD_FACTURA", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "COD_FACTURA", referencedColumnName = "COD_FACTURA", nullable = false, insertable = false, 
+            updatable = false)
     @ManyToOne(optional = false)
     private Factura factura;
-    
-    @JoinColumn(name = "COD_PRODUCTO", referencedColumnName = "COD_PRODUCTO", nullable = false, insertable = false, updatable = false)
+
+    @JoinColumn(name = "COD_PRODUCTO", referencedColumnName = "COD_PRODUCTO", nullable = false, insertable = false, 
+            updatable = false)
     @ManyToOne(optional = false)
     private Producto producto;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "facturaDetalle")
     private List<FacturaDetalleImpuesto> detalleImpuestos;
 
@@ -159,10 +162,9 @@ public class FacturaDetalle implements Serializable {
         return true;
     }
 
-    
     @Override
     public String toString() {
         return "FacturaDetalle[ facturaDetallePK=" + pk + " ]";
     }
-    
+
 }

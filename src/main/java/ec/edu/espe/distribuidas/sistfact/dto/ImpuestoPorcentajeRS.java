@@ -22,7 +22,7 @@ import lombok.Data;
 @Data
 @Builder
 public class ImpuestoPorcentajeRS {
-    
+
     private String codigoImpuesto;
     private BigDecimal porcentaje;
     private String estado;

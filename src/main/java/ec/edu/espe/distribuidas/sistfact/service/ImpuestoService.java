@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class ImpuestoService {
-    
+
     private final ImpuestoRepository impuestoRepo;
     private final ImpuestoPorcentajeRepository impuestoPorcentajeRepo;
 
@@ -35,30 +35,30 @@ public class ImpuestoService {
         this.impuestoRepo = impuestoRepo;
         this.impuestoPorcentajeRepo = impuestoPorcentajeRepo;
     }
-    
+
     @Transactional
     public void createImpuesto(Impuesto impuesto) {
         Optional<Impuesto> impuestoOpt = this.obtenerPorCodigo(impuesto.getCodigo());
         if (!impuestoOpt.isPresent()) {
             this.impuestoRepo.save(impuesto);
         } else {
-            throw new CreateException("El impuesto con codigo: "+ impuesto.getCodigo() + " ya existe");
+            throw new CreateException("El impuesto con codigo: " + impuesto.getCodigo() + " ya existe");
         }
     }
-    
+
     @Transactional
     public void modifyImpuesto(Impuesto impuesto) {
         this.impuestoRepo.save(impuesto);
     }
-    
+
     public List<Impuesto> listAll() {
         return this.impuestoRepo.findAll();
     }
-    
+
     public Optional<Impuesto> obtenerPorCodigo(String codigo) {
         return this.impuestoRepo.findById(codigo);
     }
-    
+
     @Transactional
     public void createImpuestoPorcentaje(ImpuestoPorcentaje impuestoPorcentaje) {
         impuestoPorcentaje.setEstado("INA");
@@ -66,16 +66,17 @@ public class ImpuestoService {
         impuestoPorcentaje.setFechaFin(null);
         this.impuestoPorcentajeRepo.save(impuestoPorcentaje);
     }
-    
+
     @Transactional
     public void updateImpuestoPorcentaje(ImpuestoPorcentaje impuestoPorcentaje) {
-        if ("INA".equals(impuestoPorcentaje) && impuestoPorcentaje.getFechaFin()!=null && impuestoPorcentaje.getFechaFin().before(new Date())) {
+        if ("INA".equals(impuestoPorcentaje.getEstado()) && impuestoPorcentaje.getFechaFin() != null 
+                && impuestoPorcentaje.getFechaFin().before(new Date())) {
             this.impuestoPorcentajeRepo.save(impuestoPorcentaje);
         } else {
             //lanzar exception
         }
     }
-    
+
     public Impuesto listarPorcentajesDeImpuesto(String codigo) {
         Optional<Impuesto> impuestoOpt = this.impuestoRepo.findById(codigo);
         if (impuestoOpt.isPresent()) {

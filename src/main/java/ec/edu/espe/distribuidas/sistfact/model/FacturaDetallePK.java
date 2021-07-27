@@ -17,6 +17,7 @@ import javax.persistence.Embeddable;
 
 /**
  * Representa a la clave primaria de la tabla: FACTURA_DETALLE.
+ *
  * @author Hendrix
  */
 @Embeddable
@@ -24,7 +25,7 @@ public class FacturaDetallePK implements Serializable {
 
     @Column(name = "COD_FACTURA", nullable = false)
     private Integer codigoFactura;
-    
+
     @Column(name = "COD_PRODUCTO", nullable = false, length = 20)
     private String codigoProducto;
 
@@ -85,5 +86,5 @@ public class FacturaDetallePK implements Serializable {
     public String toString() {
         return "FacturaDetallePK[ codigoFactura=" + codigoFactura + ", codigoProducto=" + codigoProducto + " ]";
     }
-    
+
 }

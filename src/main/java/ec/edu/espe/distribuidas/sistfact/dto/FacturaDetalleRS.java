@@ -21,10 +21,10 @@ import lombok.Data;
 @Data
 @Builder
 public class FacturaDetalleRS {
-    
+
     private BigDecimal cantidad;
     private String producto;
     private BigDecimal precioUnitario;
     private BigDecimal subtotal;
-    
+
 }

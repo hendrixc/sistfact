@@ -39,7 +39,7 @@ public class FacturaDetalleImpuestoPK implements Serializable {
     public FacturaDetalleImpuestoPK() {
     }
 
-    public FacturaDetalleImpuestoPK(String codigoImpuesto, BigDecimal porcentaje, Integer codigoFactura, 
+    public FacturaDetalleImpuestoPK(String codigoImpuesto, BigDecimal porcentaje, Integer codigoFactura,
             String codigoProducto) {
         this.codigoImpuesto = codigoImpuesto;
         this.porcentaje = porcentaje;
@@ -118,8 +118,8 @@ public class FacturaDetalleImpuestoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "FacturaDetalleImpuestoPK[ codigoImpuesto=" + codigoImpuesto + ", porcentaje=" + porcentaje + 
-                ", codigoFactura=" + codigoFactura + ", codigoProducto=" + codigoProducto + " ]";
+        return "FacturaDetalleImpuestoPK[ codigoImpuesto=" + codigoImpuesto + ", porcentaje=" + porcentaje
+                + ", codigoFactura=" + codigoFactura + ", codigoProducto=" + codigoProducto + " ]";
     }
 
 }
